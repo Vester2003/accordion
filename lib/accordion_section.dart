@@ -134,11 +134,10 @@ class AccordionSection extends StatelessWidget with CommonParams {
     final open = sectionCtrl.isSectionOpen.value;
 
     Timer(
-      // sectionCtrl.firstRun
-      //     ? (listCtrl.initialOpeningSequenceDelay + min(index * 200, 1000))
-      //         .milliseconds
-      //     : 0.seconds,
-      0.seconds,
+      sectionCtrl.firstRun
+          ? (listCtrl.initialOpeningSequenceDelay + min(index * 200, 1000))
+              .milliseconds
+          : 0.seconds,
       () {
         if (Accordion.sectionAnimation) {
           sectionCtrl.controller
@@ -222,11 +221,11 @@ class AccordionSection extends StatelessWidget with CommonParams {
                 if (onOpenSection != null) onOpenSection!.call();
               }
             },
-            child: AnimatedContainer(
-              duration: Accordion.sectionAnimation
-                  ? 750.milliseconds
-                  : 0.milliseconds,
-              curve: Curves.easeOut,
+            child: Container(
+              // duration: Accordion.sectionAnimation
+              //     ? 750.milliseconds
+              //     : 0.milliseconds,
+              // curve: Curves.easeOut,
               alignment: Alignment.center,
               padding: headerPadding,
               decoration: BoxDecoration(
