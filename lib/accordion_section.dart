@@ -81,7 +81,8 @@ class AccordionSection extends StatelessWidget with CommonParams {
     this.onOpenSection,
     this.onCloseSection,
   }) : super(key: key) {
-    final listCtrl = Get.put(ListController(), tag: accordionId);
+    final listCtrl =
+        Get.put(ListController(), tag: accordionId, permanent: true);
     uniqueKey = listCtrl.keys.elementAt(index);
     sectionCtrl.isSectionOpen.value = listCtrl.openSections.contains(uniqueKey);
 
@@ -200,7 +201,7 @@ class AccordionSection extends StatelessWidget with CommonParams {
                   scrollIntoViewOfItems != ScrollIntoViewOfItems.none &&
                   listCtrl.controller.hasClients) {
                 Timer(
-                  250.milliseconds,
+                  0.milliseconds,
                   () {
                     listCtrl.controller.cancelAllHighlights();
                     listCtrl.controller.scrollToIndex(index,
