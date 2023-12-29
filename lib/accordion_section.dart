@@ -130,6 +130,8 @@ class AccordionSection extends StatelessWidget with CommonParams {
 
   /// getter indication the open or closed status of this section
   get _isOpen {
+    return true;
+
     final listCtrl = Get.put(ListController(), tag: accordionId);
     final open = sectionCtrl.isSectionOpen.value;
 
