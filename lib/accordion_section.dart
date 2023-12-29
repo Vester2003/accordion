@@ -130,22 +130,21 @@ class AccordionSection extends StatelessWidget with CommonParams {
 
   /// getter indication the open or closed status of this section
   get _isOpen {
-    return true;
-
     final listCtrl = Get.put(ListController(), tag: accordionId);
     final open = sectionCtrl.isSectionOpen.value;
 
     Timer(
-      sectionCtrl.firstRun
-          ? (listCtrl.initialOpeningSequenceDelay + min(index * 200, 1000))
-              .milliseconds
-          : 0.seconds,
+      // sectionCtrl.firstRun
+      //     ? (listCtrl.initialOpeningSequenceDelay + min(index * 200, 1000))
+      //         .milliseconds
+      //     : 0.seconds,
+      0.seconds,
       () {
         if (Accordion.sectionAnimation) {
           sectionCtrl.controller
               .fling(velocity: open ? 1 : -1, springDescription: springFast);
         } else {
-          sectionCtrl.controller.value = open ? 1 : 0;
+          sectionCtrl.controller.value = open ? 0 : 0;
         }
         sectionCtrl.firstRun = false;
       },
