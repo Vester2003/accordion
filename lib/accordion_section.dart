@@ -192,7 +192,7 @@ class AccordionSection extends StatelessWidget with CommonParams {
               bottom: Radius.circular(_isOpen ? 0 : borderRadius),
             ),
             onTap: () {
-              final listCtrl = Get.put(ListController(), tag: accordionId);
+              final listCtrl = Get.put(ListController(), tag: null);
 
               listCtrl.updateSections(uniqueKey);
               _playHapticFeedback(_isOpen);
