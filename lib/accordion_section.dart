@@ -81,7 +81,7 @@ class AccordionSection extends StatelessWidget with CommonParams {
     this.onOpenSection,
     this.onCloseSection,
   }) : super(key: key) {
-    final listCtrl = Get.put(ListController(), tag: accordionId);
+    final listCtrl = Get.put(ListController());
     uniqueKey = listCtrl.keys.elementAt(index);
     sectionCtrl.isSectionOpen.value = listCtrl.openSections.contains(uniqueKey);
 
@@ -129,7 +129,7 @@ class AccordionSection extends StatelessWidget with CommonParams {
 
   /// getter indication the open or closed status of this section
   get _isOpen {
-    final listCtrl = Get.put(ListController(), tag: accordionId);
+    final listCtrl = Get.put(ListController());
     final open = sectionCtrl.isSectionOpen.value;
 
     Timer(
@@ -192,7 +192,7 @@ class AccordionSection extends StatelessWidget with CommonParams {
               bottom: Radius.circular(_isOpen ? 0 : borderRadius),
             ),
             onTap: () {
-              final listCtrl = Get.put(ListController(), tag: null);
+              final listCtrl = Get.put(ListController());
 
               listCtrl.updateSections(uniqueKey);
               _playHapticFeedback(_isOpen);
