@@ -130,7 +130,7 @@ class Accordion extends StatelessWidget with CommonParams {
         sectionClosingHapticFeedback ?? SectionHapticFeedback.none;
     sectionAnimation = openAndCloseAnimation ?? true;
     sectionScaleAnimation = scaleWhenAnimating ?? true;
-    this.accordionId = hashCode.toString();
+    this.accordionId = null;
   }
 
   @override

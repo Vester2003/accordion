@@ -92,8 +92,7 @@ class ListController extends GetxController {
       openSections.removeAt(0);
     }
 
-    // TODO:
-    // controllerIsOpen.sink.add('update list');
+    controllerIsOpen.sink.add('update list');
   }
 
   @override
