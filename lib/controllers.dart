@@ -79,7 +79,7 @@ class ListController extends GetxController {
   /// before the individual sections open one after another.
   /// Helpful if you go to a new page in your app and then (after
   /// the delay) have a nice opening sequence.
-  int initialOpeningSequenceDelay = 250;
+  int initialOpeningSequenceDelay = 0;
 
   /// adds or removes a section key from the list of open sections
   /// and notifies sections to open or close accordingly

@@ -81,8 +81,7 @@ class AccordionSection extends StatelessWidget with CommonParams {
     this.onOpenSection,
     this.onCloseSection,
   }) : super(key: key) {
-    final listCtrl =
-        Get.put(ListController(), tag: accordionId, permanent: true);
+    final listCtrl = Get.put(ListController(), tag: accordionId);
     uniqueKey = listCtrl.keys.elementAt(index);
     sectionCtrl.isSectionOpen.value = listCtrl.openSections.contains(uniqueKey);
 
@@ -143,7 +142,7 @@ class AccordionSection extends StatelessWidget with CommonParams {
           sectionCtrl.controller
               .fling(velocity: open ? 1 : -1, springDescription: springFast);
         } else {
-          sectionCtrl.controller.value = open ? 0 : 0;
+          sectionCtrl.controller.value = open ? 1 : 0;
         }
         sectionCtrl.firstRun = false;
       },
@@ -201,7 +200,7 @@ class AccordionSection extends StatelessWidget with CommonParams {
                   scrollIntoViewOfItems != ScrollIntoViewOfItems.none &&
                   listCtrl.controller.hasClients) {
                 Timer(
-                  0.milliseconds,
+                  250.milliseconds,
                   () {
                     listCtrl.controller.cancelAllHighlights();
                     listCtrl.controller.scrollToIndex(index,
