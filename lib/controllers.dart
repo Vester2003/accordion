@@ -65,8 +65,7 @@ mixin CommonParams {
 
 /// Controller for `Accordion` widget
 class ListController extends GetxController {
-  final controller =
-      AutoScrollController(axis: Axis.vertical, debugLabel: 'null');
+  final controller = AutoScrollController(axis: Axis.vertical);
   final openSections = <UniqueKey>[];
   final keys = List<UniqueKey>.generate(10000, (index) => UniqueKey());
   StreamController<String> controllerIsOpen =

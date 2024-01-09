@@ -135,6 +135,8 @@ class Accordion extends StatelessWidget with CommonParams {
 
   @override
   build(context) {
+    const GetMaterialApp(enableLog: false);
+    Get.isLogEnable = false;
     final listCtrl = Get.put(ListController());
 
     return ListView.builder(
