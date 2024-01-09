@@ -133,10 +133,11 @@ class AccordionSection extends StatelessWidget with CommonParams {
     final open = sectionCtrl.isSectionOpen.value;
 
     Timer(
-      sectionCtrl.firstRun
-          ? (listCtrl.initialOpeningSequenceDelay + min(index * 200, 1000))
-              .milliseconds
-          : 0.seconds,
+      // sectionCtrl.firstRun
+      //     ? (listCtrl.initialOpeningSequenceDelay + min(index * 200, 1000))
+      //         .milliseconds
+      //     :
+      0.seconds,
       () {
         if (Accordion.sectionAnimation) {
           sectionCtrl.controller
