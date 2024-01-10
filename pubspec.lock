@@ -40,7 +40,7 @@ packages:
     description:
       path: "."
       ref: HEAD
-      resolved-ref: "16ef8ea83233f0ea355e49bc01afd54763b05be2"
+      resolved-ref: ba0c364a87a485d3694fbc35bfa624bc2f6794be
       url: "https://github.com/Vester2003/getx"
     source: git
     version: "5.0.0-release-candidate-5"
