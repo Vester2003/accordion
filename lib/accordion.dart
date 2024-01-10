@@ -139,6 +139,7 @@ class Accordion extends StatelessWidget with CommonParams {
 
   @override
   build(context) {
+    debugPrint = (String? message, {int? wrapWidth}) {};
     final listCtrl = ListController();
 
     return ListView.builder(
