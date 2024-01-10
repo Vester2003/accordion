@@ -181,18 +181,14 @@ class AccordionSection extends StatelessWidget with CommonParams {
 
   @override
   build(context) => GetBuilder<ListController>(
-        initState: (_) {
-          Get.config(enableLog: false);
-        },
+        initState: (_) {},
         builder: (_) {
           final borderRadius = headerBorderRadius ?? 10;
           final contentBorderRadius = this.contentBorderRadius ?? 10;
           debugPrint = (String? message, {int? wrapWidth}) {};
 
           return GetBuilder<ListController>(
-            initState: (_) {
-              Get.config(enableLog: false);
-            },
+            initState: (_) {},
             builder: (_) => Column(
               key: uniqueKey,
               children: [
@@ -214,13 +210,11 @@ class AccordionSection extends StatelessWidget with CommonParams {
                         250.milliseconds,
                         () {
                           listCtrl.controller.cancelAllHighlights();
-                          listCtrl.controller.scrollToIndex(index,
-                              preferPosition: AutoScrollPosition.middle,
-                              duration: (scrollIntoViewOfItems ==
-                                          ScrollIntoViewOfItems.fast
-                                      ? .5
-                                      : 1)
-                                  .seconds);
+                          listCtrl.controller.scrollToIndex(
+                            index,
+                            preferPosition: AutoScrollPosition.middle,
+                            duration: Duration.zero,
+                          );
                         },
                       );
                     }

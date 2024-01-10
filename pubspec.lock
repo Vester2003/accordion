@@ -30,14 +30,20 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.0.3"
+  flutter_web_plugins:
+    dependency: transitive
+    description: flutter
+    source: sdk
+    version: "0.0.0"
   get:
     dependency: "direct main"
     description:
-      name: get
-      sha256: "2ba20a47c8f1f233bed775ba2dd0d3ac97b4cf32fc17731b3dfc672b06b0e92a"
-      url: "https://pub.dev"
-    source: hosted
-    version: "4.6.5"
+      path: "."
+      ref: HEAD
+      resolved-ref: "25b83cfba59289bef5a9e67dfa5d945106fbbf43"
+      url: "https://github.com/Vester2003/getx"
+    source: git
+    version: "5.0.0-release-candidate-5"
   lints:
     dependency: transitive
     description:
@@ -46,14 +52,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.0.1"
-  logging:
-    dependency: "direct main"
-    description:
-      name: logging
-      sha256: "623a88c9594aa774443aa3eb2d41807a48486b5613e67599fb4c41c0ad47c340"
-      url: "https://pub.dev"
-    source: hosted
-    version: "1.2.0"
   material_color_utilities:
     dependency: transitive
     description:

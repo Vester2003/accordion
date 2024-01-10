@@ -33,7 +33,6 @@ import 'package:accordion/accordion_section.dart';
 import 'package:accordion/controllers.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:logging/logging.dart';
 import 'package:scroll_to_index/scroll_to_index.dart';
 
 export 'accordion_section.dart';
@@ -93,7 +92,6 @@ class Accordion extends StatelessWidget with CommonParams {
     bool? scaleWhenAnimating,
     String? accordionId,
   }) : super(key: key) {
-    Logger.root.level = Level.OFF;
     print('objectAccordion');
     // TODO:
     // final listCtrl = Get.put(ListController());
@@ -141,9 +139,7 @@ class Accordion extends StatelessWidget with CommonParams {
 
   @override
   build(context) => GetBuilder<ListController>(
-        initState: (_) {
-          Get.config(enableLog: false);
-        },
+        initState: (_) {},
         builder: (_) {
           debugPrint = (String? message, {int? wrapWidth}) {};
           final listCtrl = ListController();
