@@ -206,12 +206,7 @@ class AccordionSection extends StatelessWidget with CommonParams {
                     listCtrl.controller.cancelAllHighlights();
                     listCtrl.controller.scrollToIndex(index,
                         preferPosition: AutoScrollPosition.middle,
-                        // TODO: 
-                        duration:
-                            (scrollIntoViewOfItems == ScrollIntoViewOfItems.fast
-                                    ? .5
-                                    : 1)
-                                .1);
+                        duration: const Duration(seconds: 1));
                   },
                 );
               }
