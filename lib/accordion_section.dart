@@ -83,7 +83,7 @@ class AccordionSection extends StatelessWidget with CommonParams {
   }) : super(key: key) {
     print('objectAccordionSection');
     // TODO:
-    final listCtrl = ListController();
+    final listCtrl = Get.put(ListController());
     uniqueKey = listCtrl.keys.elementAt(index);
     sectionCtrl.isSectionOpen.value = listCtrl.openSections.contains(uniqueKey);
 
