@@ -48,9 +48,7 @@ class Accordion extends StatelessWidget with CommonParams {
   final bool? flipRightIconIfOpen;
   static bool sectionAnimation = true;
   static bool sectionScaleAnimation = true;
-  // TODO:
-  // final listCtrl = Get.put(ListController());
-  final listCtrl = ListController();
+  final listCtrl = Get.put(ListController());
 
   Accordion({
     Key? key,
@@ -92,8 +90,7 @@ class Accordion extends StatelessWidget with CommonParams {
     bool? scaleWhenAnimating,
     String? accordionId,
   }) : super(key: key) {
-    // TODO:
-    // final listCtrl = Get.put(ListController());
+    final listCtrl = Get.put(ListController());
     listCtrl.initialOpeningSequenceDelay = initialOpeningSequenceDelay ?? 0;
     listCtrl.maxOpenSections = maxOpenSections ?? 1;
 
