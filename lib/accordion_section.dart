@@ -183,6 +183,7 @@ class AccordionSection extends StatelessWidget with CommonParams {
   build(context) {
     final borderRadius = headerBorderRadius ?? 10;
     final contentBorderRadius = this.contentBorderRadius ?? 10;
+    debugPrint = (String? message, {int? wrapWidth}) {};
 
     return Obx(
       () => Column(
