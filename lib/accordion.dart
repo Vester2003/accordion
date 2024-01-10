@@ -92,6 +92,7 @@ class Accordion extends StatelessWidget with CommonParams {
     bool? scaleWhenAnimating,
     String? accordionId,
   }) : super(key: key) {
+    print('objectAccordion');
     // TODO:
     // final listCtrl = Get.put(ListController());
     listCtrl.initialOpeningSequenceDelay = initialOpeningSequenceDelay ?? 0;
