@@ -180,148 +180,159 @@ class AccordionSection extends StatelessWidget with CommonParams {
   }
 
   @override
-  build(context) {
-    final borderRadius = headerBorderRadius ?? 10;
-    final contentBorderRadius = this.contentBorderRadius ?? 10;
-    debugPrint = (String? message, {int? wrapWidth}) {};
+  build(context) => GetBuilder<ListController>(
+        initState: (_) {
+          Get.config(enableLog: false);
+        },
+        builder: (_) {
+          final borderRadius = headerBorderRadius ?? 10;
+          final contentBorderRadius = this.contentBorderRadius ?? 10;
+          debugPrint = (String? message, {int? wrapWidth}) {};
 
-    return Obx(
-      () => Column(
-        key: uniqueKey,
-        children: [
-          InkWell(
-            borderRadius: BorderRadius.vertical(
-              top: Radius.circular(borderRadius),
-              bottom: Radius.circular(_isOpen ? 0 : borderRadius),
-            ),
-            onTap: () {
-              final listCtrl = Get.put(ListController());
-
-              listCtrl.updateSections(uniqueKey);
-              _playHapticFeedback(_isOpen);
-
-              if (_isOpen &&
-                  scrollIntoViewOfItems != ScrollIntoViewOfItems.none &&
-                  listCtrl.controller.hasClients) {
-                Timer(
-                  250.milliseconds,
-                  () {
-                    listCtrl.controller.cancelAllHighlights();
-                    listCtrl.controller.scrollToIndex(index,
-                        preferPosition: AutoScrollPosition.middle,
-                        duration:
-                            (scrollIntoViewOfItems == ScrollIntoViewOfItems.fast
-                                    ? .5
-                                    : 1)
-                                .seconds);
-                  },
-                );
-              }
-
-              if (_isOpen) {
-                if (onCloseSection != null) onCloseSection!.call();
-              } else {
-                if (onOpenSection != null) onOpenSection!.call();
-              }
+          return GetBuilder<ListController>(
+            initState: (_) {
+              Get.config(enableLog: false);
             },
-            child: AnimatedContainer(
-              duration: Accordion.sectionAnimation
-                  ? 750.milliseconds
-                  : 0.milliseconds,
-              curve: Curves.easeOut,
-              alignment: Alignment.center,
-              padding: headerPadding,
-              decoration: BoxDecoration(
-                color: (_isOpen
-                        ? headerBackgroundColorOpened
-                        : headerBackgroundColor) ??
-                    Theme.of(context).primaryColor,
-                borderRadius: BorderRadius.vertical(
-                  top: Radius.circular(borderRadius),
-                  bottom: Radius.circular(_isOpen ? 0 : borderRadius),
-                ),
-                border: Border.all(
-                  color:
-                      (_isOpen ? headerBorderColorOpened : headerBorderColor) ??
+            builder: (_) => Column(
+              key: uniqueKey,
+              children: [
+                InkWell(
+                  borderRadius: BorderRadius.vertical(
+                    top: Radius.circular(borderRadius),
+                    bottom: Radius.circular(_isOpen ? 0 : borderRadius),
+                  ),
+                  onTap: () {
+                    final listCtrl = Get.put(ListController());
+
+                    listCtrl.updateSections(uniqueKey);
+                    _playHapticFeedback(_isOpen);
+
+                    if (_isOpen &&
+                        scrollIntoViewOfItems != ScrollIntoViewOfItems.none &&
+                        listCtrl.controller.hasClients) {
+                      Timer(
+                        250.milliseconds,
+                        () {
+                          listCtrl.controller.cancelAllHighlights();
+                          listCtrl.controller.scrollToIndex(index,
+                              preferPosition: AutoScrollPosition.middle,
+                              duration: (scrollIntoViewOfItems ==
+                                          ScrollIntoViewOfItems.fast
+                                      ? .5
+                                      : 1)
+                                  .seconds);
+                        },
+                      );
+                    }
+
+                    if (_isOpen) {
+                      if (onCloseSection != null) onCloseSection!.call();
+                    } else {
+                      if (onOpenSection != null) onOpenSection!.call();
+                    }
+                  },
+                  child: AnimatedContainer(
+                    duration: Accordion.sectionAnimation
+                        ? 750.milliseconds
+                        : 0.milliseconds,
+                    curve: Curves.easeOut,
+                    alignment: Alignment.center,
+                    padding: headerPadding,
+                    decoration: BoxDecoration(
+                      color: (_isOpen
+                              ? headerBackgroundColorOpened
+                              : headerBackgroundColor) ??
                           Theme.of(context).primaryColor,
-                  width: (headerBorderWidth ?? 0),
-                  style: (headerBorderWidth ?? 0) <= 0
-                      ? BorderStyle.none
-                      : BorderStyle.solid,
-                ),
-              ),
-              child: Row(
-                children: [
-                  if (leftIcon != null)
-                    RotatedBox(
-                      quarterTurns: _flipQuarterTurnsLeft,
-                      child: leftIcon!,
+                      borderRadius: BorderRadius.vertical(
+                        top: Radius.circular(borderRadius),
+                        bottom: Radius.circular(_isOpen ? 0 : borderRadius),
+                      ),
+                      border: Border.all(
+                        color: (_isOpen
+                                ? headerBorderColorOpened
+                                : headerBorderColor) ??
+                            Theme.of(context).primaryColor,
+                        width: (headerBorderWidth ?? 0),
+                        style: (headerBorderWidth ?? 0) <= 0
+                            ? BorderStyle.none
+                            : BorderStyle.solid,
+                      ),
                     ),
-                  Expanded(
-                    flex: 10,
-                    child: Padding(
-                      padding: EdgeInsets.symmetric(
-                          horizontal: leftIcon == null ? 0 : 15),
-                      child: header,
+                    child: Row(
+                      children: [
+                        if (leftIcon != null)
+                          RotatedBox(
+                            quarterTurns: _flipQuarterTurnsLeft,
+                            child: leftIcon!,
+                          ),
+                        Expanded(
+                          flex: 10,
+                          child: Padding(
+                            padding: EdgeInsets.symmetric(
+                                horizontal: leftIcon == null ? 0 : 15),
+                            child: header,
+                          ),
+                        ),
+                        if (rightIcon != null)
+                          RotatedBox(
+                            quarterTurns: _flipQuarterTurnsRight,
+                            child: rightIcon!,
+                          ),
+                      ],
                     ),
                   ),
-                  if (rightIcon != null)
-                    RotatedBox(
-                      quarterTurns: _flipQuarterTurnsRight,
-                      child: rightIcon!,
-                    ),
-                ],
-              ),
-            ),
-          ),
-          Padding(
-            padding: EdgeInsets.only(
-                bottom: _isOpen
-                    ? paddingBetweenOpenSections ?? 10
-                    : paddingBetweenClosedSections ?? 10),
-            child: SizeTransition(
-              sizeFactor: sectionCtrl.controller,
-              child: ScaleTransition(
-                scale: Accordion.sectionScaleAnimation
-                    ? sectionCtrl.controller
-                    : const AlwaysStoppedAnimation(1.0),
-                child: Center(
-                  child: Container(
-                    clipBehavior: Clip.antiAlias,
-                    decoration: BoxDecoration(
-                      color:
-                          contentBorderColor ?? Theme.of(context).primaryColor,
-                      borderRadius: BorderRadius.vertical(
-                          bottom: Radius.circular(contentBorderRadius)),
-                    ),
-                    child: Padding(
-                      padding: EdgeInsets.fromLTRB(
-                        contentBorderWidth ?? 1,
-                        0,
-                        contentBorderWidth ?? 1,
-                        contentBorderWidth ?? 1,
-                      ),
-                      child: Container(
-                        clipBehavior: Clip.antiAlias,
-                        decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.vertical(
-                                bottom: Radius.circular(
-                                    contentBorderRadius / 1.02))),
+                ),
+                Padding(
+                  padding: EdgeInsets.only(
+                      bottom: _isOpen
+                          ? paddingBetweenOpenSections ?? 10
+                          : paddingBetweenClosedSections ?? 10),
+                  child: SizeTransition(
+                    sizeFactor: sectionCtrl.controller,
+                    child: ScaleTransition(
+                      scale: Accordion.sectionScaleAnimation
+                          ? sectionCtrl.controller
+                          : const AlwaysStoppedAnimation(1.0),
+                      child: Center(
                         child: Container(
                           clipBehavior: Clip.antiAlias,
                           decoration: BoxDecoration(
-                              color: contentBackgroundColor,
-                              borderRadius: BorderRadius.vertical(
-                                  bottom: Radius.circular(
-                                      contentBorderRadius / 1.02))),
+                            color: contentBorderColor ??
+                                Theme.of(context).primaryColor,
+                            borderRadius: BorderRadius.vertical(
+                                bottom: Radius.circular(contentBorderRadius)),
+                          ),
                           child: Padding(
-                            padding: EdgeInsets.symmetric(
-                              horizontal: contentHorizontalPadding ?? 10,
-                              vertical: contentVerticalPadding ?? 10,
+                            padding: EdgeInsets.fromLTRB(
+                              contentBorderWidth ?? 1,
+                              0,
+                              contentBorderWidth ?? 1,
+                              contentBorderWidth ?? 1,
                             ),
-                            child: Center(
-                              child: content,
+                            child: Container(
+                              clipBehavior: Clip.antiAlias,
+                              decoration: BoxDecoration(
+                                  color: Colors.white,
+                                  borderRadius: BorderRadius.vertical(
+                                      bottom: Radius.circular(
+                                          contentBorderRadius / 1.02))),
+                              child: Container(
+                                clipBehavior: Clip.antiAlias,
+                                decoration: BoxDecoration(
+                                    color: contentBackgroundColor,
+                                    borderRadius: BorderRadius.vertical(
+                                        bottom: Radius.circular(
+                                            contentBorderRadius / 1.02))),
+                                child: Padding(
+                                  padding: EdgeInsets.symmetric(
+                                    horizontal: contentHorizontalPadding ?? 10,
+                                    vertical: contentVerticalPadding ?? 10,
+                                  ),
+                                  child: Center(
+                                    child: content,
+                                  ),
+                                ),
+                              ),
                             ),
                           ),
                         ),
@@ -329,11 +340,9 @@ class AccordionSection extends StatelessWidget with CommonParams {
                     ),
                   ),
                 ),
-              ),
+              ],
             ),
-          ),
-        ],
-      ),
-    );
-  }
+          );
+        },
+      );
 }

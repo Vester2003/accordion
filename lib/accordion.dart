@@ -138,7 +138,7 @@ class Accordion extends StatelessWidget with CommonParams {
   }
 
   @override
-  build(context) => GetBuilder(
+  build(context) => GetBuilder<ListController>(
         initState: (_) {
           Get.config(enableLog: false);
         },
