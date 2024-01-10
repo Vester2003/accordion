@@ -139,7 +139,7 @@ class Accordion extends StatelessWidget with CommonParams {
 
   @override
   build(context) {
-    final listCtrl = Get.put(ListController());
+    final listCtrl = ListController();
 
     return ListView.builder(
       itemCount: children.length,
