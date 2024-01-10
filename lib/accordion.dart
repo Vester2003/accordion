@@ -138,96 +138,83 @@ class Accordion extends StatelessWidget with CommonParams {
   }
 
   @override
-  build(context) => GetBuilder<ListController>(
-        initState: (_) {},
-        builder: (_) {
-          debugPrint = (String? message, {int? wrapWidth}) {};
-          final listCtrl = ListController();
+  build(context) {
+    debugPrint = (String? message, {int? wrapWidth}) {};
+    final listCtrl = ListController();
 
-          return ListView.builder(
-            itemCount: children.length,
-            controller: listCtrl.controller,
-            shrinkWrap: true,
-            physics: disableScrolling
-                ? const NeverScrollableScrollPhysics()
-                : const AlwaysScrollableScrollPhysics(),
-            padding: EdgeInsets.only(
-              top: paddingListTop,
-              bottom: paddingListBottom,
-              right: paddingListHorizontal,
-              left: paddingListHorizontal,
-            ),
-            cacheExtent: 100000,
-            itemBuilder: (context, index) {
-              final key = listCtrl.keys.elementAt(index);
-              final child = children.elementAt(index);
+    return ListView.builder(
+      itemCount: children.length,
+      controller: listCtrl.controller,
+      shrinkWrap: true,
+      physics: disableScrolling
+          ? const NeverScrollableScrollPhysics()
+          : const AlwaysScrollableScrollPhysics(),
+      padding: EdgeInsets.only(
+        top: paddingListTop,
+        bottom: paddingListBottom,
+        right: paddingListHorizontal,
+        left: paddingListHorizontal,
+      ),
+      cacheExtent: 100000,
+      itemBuilder: (context, index) {
+        final key = listCtrl.keys.elementAt(index);
+        final child = children.elementAt(index);
 
-              return AutoScrollTag(
-                key: key,
-                controller: listCtrl.controller,
-                index: index,
-                child: AccordionSection(
-                  key: key,
-                  index: index,
-                  isOpen: child.isOpen,
-                  scrollIntoViewOfItems: scrollIntoViewOfItems,
-                  headerBackgroundColor:
-                      child.headerBackgroundColor ?? headerBackgroundColor,
-                  headerBackgroundColorOpened:
-                      child.headerBackgroundColorOpened ??
-                          headerBackgroundColorOpened ??
-                          headerBackgroundColor,
-                  headerBorderColor:
-                      child.headerBorderColor ?? headerBorderColor,
-                  headerBorderColorOpened: child.headerBorderColorOpened ??
-                      headerBorderColorOpened ??
-                      headerBorderColor,
-                  headerBorderWidth:
-                      child.headerBorderWidth ?? headerBorderWidth,
-                  headerBorderRadius:
-                      child.headerBorderRadius ?? headerBorderRadius,
-                  headerPadding: child.headerPadding ?? headerPadding,
-                  header: child.header,
-                  leftIcon: child.leftIcon ?? leftIcon,
-                  rightIcon: child.rightIcon ??
-                      rightIcon ??
-                      const Icon(
-                        Icons.keyboard_arrow_down,
-                        color: Colors.white60,
-                        size: 20,
-                      ),
-                  paddingBetweenClosedSections:
-                      child.paddingBetweenClosedSections ??
-                          paddingBetweenClosedSections,
-                  paddingBetweenOpenSections:
-                      child.paddingBetweenOpenSections ??
-                          paddingBetweenOpenSections,
-                  content: child.content,
-                  contentBackgroundColor:
-                      child.contentBackgroundColor ?? contentBackgroundColor,
-                  contentBorderColor:
-                      child.contentBorderColor ?? contentBorderColor,
-                  contentBorderWidth:
-                      child.contentBorderWidth ?? contentBorderWidth,
-                  contentBorderRadius:
-                      child.contentBorderRadius ?? contentBorderRadius,
-                  contentHorizontalPadding: child.contentHorizontalPadding ??
-                      contentHorizontalPadding,
-                  contentVerticalPadding:
-                      child.contentVerticalPadding ?? contentVerticalPadding,
-                  sectionOpeningHapticFeedback:
-                      child.sectionOpeningHapticFeedback ??
-                          sectionOpeningHapticFeedback,
-                  sectionClosingHapticFeedback:
-                      child.sectionClosingHapticFeedback ??
-                          sectionClosingHapticFeedback,
-                  accordionId: accordionId,
-                  onOpenSection: child.onOpenSection,
-                  onCloseSection: child.onCloseSection,
+        return AutoScrollTag(
+          key: key,
+          controller: listCtrl.controller,
+          index: index,
+          child: AccordionSection(
+            key: key,
+            index: index,
+            isOpen: child.isOpen,
+            scrollIntoViewOfItems: scrollIntoViewOfItems,
+            headerBackgroundColor:
+                child.headerBackgroundColor ?? headerBackgroundColor,
+            headerBackgroundColorOpened: child.headerBackgroundColorOpened ??
+                headerBackgroundColorOpened ??
+                headerBackgroundColor,
+            headerBorderColor: child.headerBorderColor ?? headerBorderColor,
+            headerBorderColorOpened: child.headerBorderColorOpened ??
+                headerBorderColorOpened ??
+                headerBorderColor,
+            headerBorderWidth: child.headerBorderWidth ?? headerBorderWidth,
+            headerBorderRadius: child.headerBorderRadius ?? headerBorderRadius,
+            headerPadding: child.headerPadding ?? headerPadding,
+            header: child.header,
+            leftIcon: child.leftIcon ?? leftIcon,
+            rightIcon: child.rightIcon ??
+                rightIcon ??
+                const Icon(
+                  Icons.keyboard_arrow_down,
+                  color: Colors.white60,
+                  size: 20,
                 ),
-              );
-            },
-          );
-        },
-      );
+            paddingBetweenClosedSections: child.paddingBetweenClosedSections ??
+                paddingBetweenClosedSections,
+            paddingBetweenOpenSections:
+                child.paddingBetweenOpenSections ?? paddingBetweenOpenSections,
+            content: child.content,
+            contentBackgroundColor:
+                child.contentBackgroundColor ?? contentBackgroundColor,
+            contentBorderColor: child.contentBorderColor ?? contentBorderColor,
+            contentBorderWidth: child.contentBorderWidth ?? contentBorderWidth,
+            contentBorderRadius:
+                child.contentBorderRadius ?? contentBorderRadius,
+            contentHorizontalPadding:
+                child.contentHorizontalPadding ?? contentHorizontalPadding,
+            contentVerticalPadding:
+                child.contentVerticalPadding ?? contentVerticalPadding,
+            sectionOpeningHapticFeedback: child.sectionOpeningHapticFeedback ??
+                sectionOpeningHapticFeedback,
+            sectionClosingHapticFeedback: child.sectionClosingHapticFeedback ??
+                sectionClosingHapticFeedback,
+            accordionId: accordionId,
+            onOpenSection: child.onOpenSection,
+            onCloseSection: child.onCloseSection,
+          ),
+        );
+      },
+    );
+  }
 }
