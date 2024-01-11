@@ -13,7 +13,7 @@ dependencies:
     sdk: flutter
   get:  
     git:
-      url: https://github.com/Vester2003/getx
+      url: https://github.com/umbrellait-vladislav-grebenshshikov/getx
       # ref: 00ddbdb4a17c714dc61455575346550eddd8d6c2
   scroll_to_index: ^3.0.1
 
