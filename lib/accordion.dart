@@ -48,9 +48,7 @@ class Accordion extends StatelessWidget with CommonParams {
   final bool? flipRightIconIfOpen;
   static bool sectionAnimation = true;
   static bool sectionScaleAnimation = true;
-  // TODO:
   final listCtrl = Get.put(ListController());
-  // final listCtrl = ListController();
 
   Accordion({
     Key? key,
@@ -92,9 +90,7 @@ class Accordion extends StatelessWidget with CommonParams {
     bool? scaleWhenAnimating,
     String? accordionId,
   }) : super(key: key) {
-    print('objectAccordion');
-    // TODO:
-    final listCtrl = Get.put(ListController());
+    final listCtrl = Get.put(ListController(), tag: hashCode.toString());
     listCtrl.initialOpeningSequenceDelay = initialOpeningSequenceDelay ?? 0;
     listCtrl.maxOpenSections = maxOpenSections ?? 1;
 
@@ -134,13 +130,12 @@ class Accordion extends StatelessWidget with CommonParams {
         sectionClosingHapticFeedback ?? SectionHapticFeedback.none;
     sectionAnimation = openAndCloseAnimation ?? true;
     sectionScaleAnimation = scaleWhenAnimating ?? true;
-    this.accordionId = null;
+    this.accordionId = hashCode.toString();
   }
 
   @override
   build(context) {
-    debugPrint = (String? message, {int? wrapWidth}) {};
-    final listCtrl = Get.put(ListController());
+    final listCtrl = Get.put(ListController(), tag: hashCode.toString());
 
     return ListView.builder(
       itemCount: children.length,

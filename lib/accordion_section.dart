@@ -1,6 +1,3 @@
-import 'dart:async';
-import 'dart:math';
-
 import 'package:accordion/accordion.dart';
 import 'package:accordion/controllers.dart';
 import 'package:flutter/material.dart';
@@ -81,9 +78,7 @@ class AccordionSection extends StatelessWidget with CommonParams {
     this.onOpenSection,
     this.onCloseSection,
   }) : super(key: key) {
-    print('objectAccordionSection');
-    // TODO:
-    final listCtrl = Get.put(ListController());
+    final listCtrl = Get.put(ListController(), tag: accordionId);
     uniqueKey = listCtrl.keys.elementAt(index);
     sectionCtrl.isSectionOpen.value = listCtrl.openSections.contains(uniqueKey);
 
@@ -131,25 +126,31 @@ class AccordionSection extends StatelessWidget with CommonParams {
 
   /// getter indication the open or closed status of this section
   get _isOpen {
-    // final listCtrl = Get.put(ListController());
     final open = sectionCtrl.isSectionOpen.value;
 
-    Timer(
-      // sectionCtrl.firstRun
-      //     ? (listCtrl.initialOpeningSequenceDelay + min(index * 200, 1000))
-      //         .milliseconds
-      //     :
-      0.seconds,
-      () {
-        if (Accordion.sectionAnimation) {
-          sectionCtrl.controller
-              .fling(velocity: open ? 1 : -1, springDescription: springFast);
-        } else {
-          sectionCtrl.controller.value = open ? 1 : 0;
-        }
-        sectionCtrl.firstRun = false;
-      },
-    );
+    if (Accordion.sectionAnimation) {
+      sectionCtrl.controller
+          .fling(velocity: open ? 1 : -1, springDescription: springFast);
+    } else {
+      sectionCtrl.controller.value = open ? 1 : 0;
+    }
+    sectionCtrl.firstRun = false;
+
+    // Timer(
+    //   sectionCtrl.firstRun
+    //       ? (listCtrl.initialOpeningSequenceDelay + min(index * 200, 1000))
+    //           .milliseconds
+    //       : 0.seconds,
+    //   () {
+    //     if (Accordion.sectionAnimation) {
+    //       sectionCtrl.controller
+    //           .fling(velocity: open ? 1 : -1, springDescription: springFast);
+    //     } else {
+    //       sectionCtrl.controller.value = open ? 1 : 0;
+    //     }
+    //     sectionCtrl.firstRun = false;
+    //   },
+    // );
 
     return open;
   }
@@ -183,11 +184,9 @@ class AccordionSection extends StatelessWidget with CommonParams {
   build(context) {
     final borderRadius = headerBorderRadius ?? 10;
     final contentBorderRadius = this.contentBorderRadius ?? 10;
-    debugPrint = (String? message, {int? wrapWidth}) {};
 
-    return GetBuilder<ListController>(
-      initState: (_) {},
-      builder: (_) => Column(
+    return Obx(
+      () => Column(
         key: uniqueKey,
         children: [
           InkWell(
@@ -196,7 +195,7 @@ class AccordionSection extends StatelessWidget with CommonParams {
               bottom: Radius.circular(_isOpen ? 0 : borderRadius),
             ),
             onTap: () {
-              final listCtrl = Get.put(ListController());
+              final listCtrl = Get.put(ListController(), tag: accordionId);
 
               listCtrl.updateSections(uniqueKey);
               _playHapticFeedback(_isOpen);
@@ -204,17 +203,30 @@ class AccordionSection extends StatelessWidget with CommonParams {
               if (_isOpen &&
                   scrollIntoViewOfItems != ScrollIntoViewOfItems.none &&
                   listCtrl.controller.hasClients) {
-                Timer(
-                  250.milliseconds,
-                  () {
-                    listCtrl.controller.cancelAllHighlights();
-                    listCtrl.controller.scrollToIndex(
-                      index,
-                      preferPosition: AutoScrollPosition.middle,
-                      duration: Duration.zero,
-                    );
-                  },
+                listCtrl.controller.cancelAllHighlights();
+                listCtrl.controller.scrollToIndex(
+                  index,
+                  preferPosition: AutoScrollPosition.middle,
+                  duration: Duration.zero,
                 );
+                // (
+                //         scrollIntoViewOfItems == ScrollIntoViewOfItems.fast
+                //             ? .5
+                //             : 1)
+                //     .seconds);
+                // Timer(
+                //   250.milliseconds,
+                //   () {
+                //     listCtrl.controller.cancelAllHighlights();
+                //     listCtrl.controller.scrollToIndex(index,
+                //         preferPosition: AutoScrollPosition.middle,
+                //         duration:
+                //             (scrollIntoViewOfItems == ScrollIntoViewOfItems.fast
+                //                     ? .5
+                //                     : 1)
+                //                 .seconds);
+                //   },
+                // );
               }
 
               if (_isOpen) {
